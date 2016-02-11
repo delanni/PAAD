@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Stack API test: Stack vs Array",
+        "contestants": [{
+            "name": "Stack",
+            "path": "js/Stack/Stack.js",
+            "push": "push",
+            "pop": "pop"
+}, {
+            "name": "Array",
+            "path": null,
+            "push": "push",
+            "pop": "pop"
+}],
+        "fixture": "StackAPITest.js"
+    }
+]
