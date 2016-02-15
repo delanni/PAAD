@@ -20,7 +20,7 @@ I aim to practise and discover data structures and algorithms commonly known in 
 
 Goals
  * Implement and test:
- * * [ ] Stack 
+ * * [x] Stack 
  * * [ ] Heap 
  * * [ ] Red-Black tree
  * * [ ] Heap
