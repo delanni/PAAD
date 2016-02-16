@@ -13,7 +13,7 @@
  | |                                  
 (___)                                 
 ```
-Programming Algorithms and Data
+Programming Algorithms and Data [![Build Status](https://travis-ci.org/delanni/PAAD.svg?branch=master)](https://travis-ci.org/delanni/PAAD)
 ---
 
 I aim to practise and discover data structures and algorithms commonly known in programming over examples.
@@ -21,7 +21,7 @@ I aim to practise and discover data structures and algorithms commonly known in 
 Goals
  * Implement and test:
  * * [x] Stack 
- * * [ ] Heap 
+ * * [x] Heap 
  * * [ ] Red-Black tree
  * * [ ] Heap
  * * [ ] LRU cache
