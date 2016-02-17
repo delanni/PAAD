@@ -194,6 +194,11 @@ describe("extended api", function(){
         
         expect(s.size).toBe(3);
         expect(s.peek()).toBe(6);
+        
+        s.rotate(0);
+        
+        expect(s.size).toBe(3);
+        expect(s.peek()).toBe(6);
     });
     
     it("rotates backwards", function(){
