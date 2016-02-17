@@ -30,6 +30,12 @@ module.exports = function (config) {
         preprocessors: {
             "js/**/*js": "coverage"
         },
+        coverageReporter: {
+            type: "lcov",
+            dir: "coverage/"
+        },
+        plugins: ['karma-coverage', 'karma-jasmine', 
+                 'karma-phantomjs-launcher'],
 
 
         // test results reporter to use
@@ -58,13 +64,6 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['PhantomJS'],
-
-        coverageReporter: {
-            type: "lcov",
-            dir: "coverage/"
-        },
-
-        plugins: ["coverall"],
 
 
         // Continuous Integration mode
