@@ -4,7 +4,7 @@ var gulp   = require('gulp');
 var karma = require('karma').server;
 var path = require('path');
 
-var configFile = path.resolve(__dirname, 'spec/karma.conf.js');
+var configFile = path.resolve(__dirname, 'karma.conf.js');
 /**
  * Run test once and exit
  */
