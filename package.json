@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "node ./node_modules/karma/bin/karma start --singleRun=true",
+    "test": "node ./node_modules/karma/bin/karma start --singleRun=true & grunt",
     "testCont": "node ./node_modules/karma/bin/karma start",
     "perf": "node runPerfTests.js perf.json"
   },
