@@ -1,37 +1,39 @@
 {
-    "scripts": {
-        "test": "node ./node_modules/karma/bin/karma start",
-        "perf": "node runPerfTests.js perf.json"
-    },
-    "devDependencies": {
-        "gulp": "^3.8.11",
-        "brfs": "^1.4.0",
-        "browserify-shim": "~3.8.0",
-        "karma": "^0.12.31",
-        "karma-browserify": "^4.1.2",
-        "karma-jasmine": "^0.3.5",
-        "karma-phantomjs-launcher": "^0.1.4",
-        "jasmine-core": "^2.4.1"
-    },
-    "browserify-shim": {
-        "external": "global:External"
-    },
-    "name": "paad",
-    "description": "```\r                                  ___  \r                                 (   ) \r    .-..     .---.    .---.    .-.| |  \r   /    \\   / .-, \\  / .-, \\  /   \\ |  \r  ' .-,  ; (__) ; | (__) ; | |  .-. |  \r  | |  . |   .'`  |   .'`  | | |  | |  \r  | |  | |  / .'| |  / .'| | | |  | |  \r  | |  | | | /  | | | /  | | | |  | |  \r  | |  ' | ; |  ; | ; |  ; | | '  | |  \r  | `-'  ' ' `-'  | ' `-'  | ' `-'  /  \r  | \\__.'  `.__.'_. `.__.'_.  `.__,'   \r  | |                                  \r (___)                                 \r ```\r Programming Algorithms and Data\r ---",
-    "version": "1.0.0",
-    "main": "gulpfile.js",
-    "dependencies": {
-        "grunt": "^0.4.5",
-        "yo": "^1.6.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/delanni/PAAD.git"
-    },
-    "author": "Alex Szabo (delanni.alex@gmail.com)",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/delanni/PAAD/issues"
-    },
-    "homepage": "https://github.com/delanni/PAAD#readme"
+  "scripts": {
+    "test": "node ./node_modules/karma/bin/karma start",
+    "perf": "node runPerfTests.js perf.json"
+  },
+  "devDependencies": {
+    "brfs": "^1.4.0",
+    "browserify-shim": "~3.8.0",
+    "grunt-karma-coveralls": "^2.5.4",
+    "gulp": "^3.8.11",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.12.31",
+    "karma-browserify": "^4.1.2",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "browserify-shim": {
+    "external": "global:External"
+  },
+  "name": "paad",
+  "description": "```\r                                  ___  \r                                 (   ) \r    .-..     .---.    .---.    .-.| |  \r   /    \\   / .-, \\  / .-, \\  /   \\ |  \r  ' .-,  ; (__) ; | (__) ; | |  .-. |  \r  | |  . |   .'`  |   .'`  | | |  | |  \r  | |  | |  / .'| |  / .'| | | |  | |  \r  | |  | | | /  | | | /  | | | |  | |  \r  | |  ' | ; |  ; | ; |  ; | | '  | |  \r  | `-'  ' ' `-'  | ' `-'  | ' `-'  /  \r  | \\__.'  `.__.'_. `.__.'_.  `.__,'   \r  | |                                  \r (___)                                 \r ```\r Programming Algorithms and Data\r ---",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "yo": "^1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delanni/PAAD.git"
+  },
+  "author": "Alex Szabo (delanni.alex@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delanni/PAAD/issues"
+  },
+  "homepage": "https://github.com/delanni/PAAD#readme"
 }
