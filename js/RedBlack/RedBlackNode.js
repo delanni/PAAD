@@ -1,23 +1,26 @@
-var RedBlackNode = function (key, value) {
+var RedBlackNode = function (key, value, tree) {
     this.left = null;
     this.right = null;
     this.key = key;
     this.value = value;
     this.isBlack = false;
     this._parent = null;
+    this._tree = tree;
 };
 
 RedBlackNode.prototype.attach = function (node) {
+    if (node.key == this.key) {
+        this.value = node.value;
+        return;
+    }
     var side = node.key > this.key ? "right" : "left";
     if (this[side]) {
-        console.log("Attaching to the " + side);
         this[side].attach(node);
     } else {
-        console.log("creating new leaf to the " + side);
         this[side] = node;
+        node._parent = this;
+        node.recolor();
     }
-    node._parent = this;
-    node.recolor();
 };
 
 RedBlackNode.prototype.retrieve = function (key) {
@@ -46,7 +49,6 @@ RedBlackNode.prototype.express = function () {
 };
 
 RedBlackNode.prototype.hasDescendant = function (node) {
-    if (this == node) return false;
     return this.express().some(function (e) {
         return e == node;
     });
@@ -54,15 +56,12 @@ RedBlackNode.prototype.hasDescendant = function (node) {
 
 RedBlackNode.prototype.recolor = function () {
     if (!this._parent) {
-        console.log("Coloring to black", this.toString());
         this.isBlack = true;
     } else {
         var parent = this._parent;
         if (!parent.isBlack) {
-            console.log("Parent is not black", this.toString());
             var aunt = this._getAunt();
             var granny = this._getGrandParent();
-            console.log("Aunt, and granny: ", aunt.toString(), granny.toString());
             if (aunt && !aunt.isBlack) {
                 parent.isBlack = true;
                 aunt.isBlack = true;
@@ -104,6 +103,9 @@ RedBlackNode.prototype._rotateLeft = function () {
     if (parent) {
         parent.left = rightKid;
         rightKid._parent = parent;
+    } else {
+        rightKid._parent = null;
+        rightKid._tree._root = rightKid;
     }
     this.right = rightKid.left;
     rightKid.left = this;
@@ -115,8 +117,11 @@ RedBlackNode.prototype._rotateRight = function () {
     var leftKid = this.left;
 
     if (parent) {
-        parent.left = leftKid;
+        parent.right = leftKid;
         leftKid._parent = parent;
+    } else {
+        leftKid._parent = null;
+        leftKid._tree._root = leftKid;
     }
     this.left = leftKid.right;
     leftKid.right = this;
@@ -164,8 +169,6 @@ RedBlackNode.prototype._pathTo = function (leaf) {
 };
 
 RedBlackNode.prototype.toString = function () {
-    var s = "[" + this.key + "]";
-    if (this.left) s += " left:" + this.left.key;
-    if (this.right) s += " left:" + this.right.key;
+    var s = "[" + this.key + ", " + (this.isBlack?"black":"red") + "]";
     return s;
 };

@@ -73,15 +73,71 @@ describe("Behaviour", function () {
 
     it("has red-black property", function () {
         var t = new RedBlackTree();
-        var keys = ["a", "b", "c", "apples", "peaches", "bananas"];
+        var keys = ["a", "b", "c", "apples", "peaches", "bananas", "2309", 39, "xair"];
         var values = [1, 2, 3, "3923", {}, {
             c: 4
-        }];
+        }, 4,2,4];
         
         for (var i = 0; i < keys.length; i++) {
             t.put(keys[i], values[i]);
             var res = t.validateRedBlack();
             expect(res).toBe(true);
         }
+    });
+    
+    it("updates key if collides", function(){
+        var t = new RedBlackTree();
+        
+        var k = "dakey";
+        var v = "davalue";
+        
+        t.put(k,v);
+        var retrieved = t.get(k);
+        
+        t.put(k, "somethingelse");
+        
+        var otherRetrieved = t.get(k);
+        
+        expect(otherRetrieved).not.toBe(retrieved);
+    });
+    
+    it("removes nodes correctly", function(){
+        var t = new RedBlackTree();
+        
+        var keys = ["oranges","apples","peaches"];
+        var values = [1,2,3];
+        
+        for(var i=0;i<keys.length;i++){
+            t.put(keys[i],values[i]);
+        }
+        
+        expect(t.validateRedBlack()).toBe(true);
+        expect(t.size).toBe(3);
+        
+        t.delete("oranges");
+        expect(t.size).toBe(2);
+        expect(t.validateRedBlack()).toBe(true);
+    });
+    
+    it("removes multiple elements", function(){
+        var t = new RedBlackTree();
+        
+        var keys = ["oranges","apples","peaches"];
+        var values = [1,2,3];
+        
+        for(var i=0;i<keys.length;i++){
+            t.put(keys[i],values[i]);
+        }
+        
+        expect(t.validateRedBlack()).toBe(true);
+        expect(t.size).toBe(3);
+        
+        for(var i=0;i<keys.length; i++){
+            t.delete(keys[keys.length-1-i]);
+            expect(t.validateRedBlack()).toBe(true);
+        }
+        
+        expect(t.size).toBe(0);
+        expect(t.isEmpty).toBe(true);
     });
 });

@@ -5,7 +5,7 @@ var RedBlackTree = function () {
 };
 
 RedBlackTree.prototype.put = function (key, value) {
-    var n = new RedBlackNode(key, value);
+    var n = new RedBlackNode(key, value, this);
     this._insert(n);
 };
 
@@ -15,18 +15,18 @@ RedBlackTree.prototype.get = function (key) {
 };
 
 RedBlackTree.prototype.delete = function () {
-
+    
 };
 
 RedBlackTree.prototype._insert = function (n) {
     if (this.isEmpty) {
         this._root = n;
-        this.size++;
-        this.isEmpty = false;
         n.recolor();
     } else {
         this._root.attach(n);
     }
+    this.size++;
+    this.isEmpty = false;
 };
 
 RedBlackTree.prototype._retrieve = function (k) {
@@ -62,9 +62,11 @@ RedBlackTree.prototype.validateRedBlack = function () {
     //        return n.isBlack;
     //    });
 
-    var clause4 = nodes.filter(function (e) {
+    var blackNodes = nodes.filter(function (e) {
         return !e.isBlack;
-    }).some(function (e) {
+    });
+
+    var clause4 = blackNodes.length == 0 || blackNodes.some(function (e) {
         return (!e.left || e.left.isBlack) && (!e.right || e.right.isBlack);
     });
 
@@ -95,16 +97,16 @@ RedBlackTree.prototype.validateRedBlack = function () {
     };
 
     if (!clause1) {
-        console.log("clause 1 is false");
+        console.warn("clause 1 is false");
     }
     if (!clause2) {
-        console.log("clause 2 is false");
+        console.warn("clause 2 is false");
     }
     if (!clause4) {
-        console.log("clause 4 is false");
+        console.warn("clause 4 is false");
     }
     if (!clause5) {
-        console.log("clause 5 is false");
+        console.warn("clause 5 is false");
     }
 
     return clause1 && clause2 /*&& clause3*/ && clause4 && clause5;
