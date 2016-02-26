@@ -27,7 +27,7 @@ I aim to practise and discover data structures and algorithms commonly known in 
  Implement and test:
  * * [x] Stack 
  * * [x] Heap 
- * * [ ] Red-Black tree
+ * * [x] Red-Black tree
  * * [ ] Graph with Edges and Nodes
  * * [ ] LRU cache
  * * [ ] Bloom filter

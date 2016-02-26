@@ -215,6 +215,54 @@ describe("Behaviour", function () {
         t.delete(lastKey);
 
         expect(t.size).toBe(keySize - 3);
-
+        
+        for(var i=0; i<_keys.length;i++){
+            t.delete(_keys[i]);
+        }
+        
+        expect(t.size).toBe(0);
+    });
+    
+    it("is a search tree indeed", function(){
+        var keys = [Math.random(), Math.random(), Math.random()];
+        
+        var t = new RedBlackTree();
+        
+        t.put(keys[0],keys[0]);
+        t.put(keys[1],keys[1]);
+        t.put(keys[2],keys[2]);
+        
+        var nodesInOrder = t.getNodes();
+        expect(nodesInOrder.length).toBe(3);
+        
+        expect(nodesInOrder[0].key < nodesInOrder[1].key).toBe(true);
+        expect(nodesInOrder[1].key < nodesInOrder[2].key).toBe(true);
+        
+        t.delete(keys[0]);
+        t.delete(keys[1]);
+        t.delete(keys[2]);
+        
+        var emptySet = t.getNodes();
+        expect(emptySet.length).toBe(0);
+    });
+    
+    it("handles empty edge cases", function(){
+        var t = new RedBlackTree();
+        
+        t.put("key","value");
+        
+        expect(t.size).toBe(1);
+        
+        t.delete("jibjab");
+        
+        expect(t.size).toBe(1);
+        
+        t.delete("key");
+        
+        expect(t.size).toBe(0);
+        
+        t.delete("jibjabagain");
+        
+        expect(t.size).toBe(0);
     });
 });

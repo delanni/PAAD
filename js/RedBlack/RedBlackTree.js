@@ -21,7 +21,10 @@ RedBlackTree.prototype.delete = function (key) {
         node.delete();
     }
     this.size--;
-    if (this.size == 0) this.isEmpty = true;
+    if (this.size == 0) {
+        this.isEmpty = true;
+        this._root = null;
+    }
 };
 
 RedBlackTree.prototype._insert = function (n) {
@@ -108,19 +111,6 @@ RedBlackTree.prototype.validateRedBlack = function () {
     } else {
         clause5 = true;
     };
-
-    if (!clause1) {
-        console.warn("clause 1 is false");
-    }
-    if (!clause2) {
-        console.warn("clause 2 is false");
-    }
-    if (!clause4) {
-        console.warn("clause 4 is false");
-    }
-    if (!clause5) {
-        console.warn("clause 5 is false");
-    }
 
     return clause1 && clause2 /*&& clause3*/ && clause4 && clause5;
 };

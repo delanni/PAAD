@@ -215,8 +215,3 @@ RedBlackNode.prototype._pathTo = function (leaf) {
         return [this];
     }
 };
-
-RedBlackNode.prototype.toString = function () {
-    var s = "[" + this.key + ", " + (this.isBlack ? "black" : "red") + "]";
-    return s;
-};
