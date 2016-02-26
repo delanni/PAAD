@@ -9,10 +9,6 @@ var RedBlackNode = function (key, value, tree) {
 };
 
 RedBlackNode.prototype.attach = function (node) {
-    if (node.key == this.key) {
-        this.value = node.value;
-        return;
-    }
     var side = node.key > this.key ? "right" : "left";
     if (this[side]) {
         this[side].attach(node);
@@ -23,9 +19,37 @@ RedBlackNode.prototype.attach = function (node) {
     }
 };
 
+RedBlackNode.prototype.delete = function () {
+    if (this.left && this.right) {
+        var leftKids = this.left.express();
+        var rightKids = this.right.express();
+        if (leftKids.length > rightKids.length) {
+            var biggest = leftKids[leftKids.length - 1];
+            this.key = biggest.key;
+            this.value = biggest.value;
+            biggest.delete();
+        } else {
+            var smallest = rightKids[0];
+            this.key = smallest.key;
+            this.value = smallest.value;
+            smallest.delete();
+        }
+    } else if (!this.left && !this.right) {
+        var p = this._parent;
+        if (p) {
+            if (p.left == this) p.left = null;
+            if (p.right == this) p.right = null;
+        }
+        this._parent = null;
+        this._tree = null;
+    } else {
+        // what's here? 
+    }
+};
+
 RedBlackNode.prototype.retrieve = function (key) {
     if (this.key == key) {
-        return this.value;
+        return this;
     } else {
         var side = key > this.key ? "right" : "left";
         if (this[side]) {
@@ -71,12 +95,12 @@ RedBlackNode.prototype.recolor = function () {
                 var newFocus = this;
                 if (parent.right == this && granny.left == parent) {
                     // Rotate left on parent
-                    parent._rotateLeft();
+                    this._rotateLeft();
 
                     newFocus = parent;
                 } else if (parent.left == this && granny.right == parent) {
                     // Rotate right on parent 
-                    parent._rotateRight();
+                    this._rotateRight();
 
                     newFocus = parent;
                 }
@@ -86,10 +110,10 @@ RedBlackNode.prototype.recolor = function () {
                 granny.isBlack = false;
                 if (newFocus == parent.left) {
                     // Rotate right on granny
-                    granny._rotateRight();
+                    parent._rotateRight();
                 } else {
                     // Rotate left on granny
-                    granny._rotateLeft();
+                    parent._rotateLeft();
                 }
             }
         }
@@ -97,35 +121,59 @@ RedBlackNode.prototype.recolor = function () {
 };
 
 RedBlackNode.prototype._rotateLeft = function () {
-    var parent = this._parent;
-    var rightKid = this.right;
-
-    if (parent) {
-        parent.left = rightKid;
-        rightKid._parent = parent;
-    } else {
-        rightKid._parent = null;
-        rightKid._tree._root = rightKid;
-    }
-    this.right = rightKid.left;
-    rightKid.left = this;
-    this._parent = rightKid;
-};
-
-RedBlackNode.prototype._rotateRight = function () {
+    // TODO: Revise
     var parent = this._parent;
     var leftKid = this.left;
 
     if (parent) {
+        var granny = parent._parent;
+
         parent.right = leftKid;
-        leftKid._parent = parent;
-    } else {
-        leftKid._parent = null;
-        leftKid._tree._root = leftKid;
+        if (leftKid) {
+            leftKid._parent = parent;
+        }
+        parent._parent = this;
+
+        this.left = parent;
+        this._parent = granny;
+        if (!granny) {
+            this._tree._root = this;
+        } else {
+            if (granny.left == parent) {
+                granny.left = this;
+            } else {
+                granny.right = this;
+            }
+        }
     }
-    this.left = leftKid.right;
-    leftKid.right = this;
-    this._parent = leftKid;
+};
+
+RedBlackNode.prototype._rotateRight = function () {
+    // TODO: Revise
+    var parent = this._parent;
+    var rightKid = this.right;
+
+    if (parent) {
+        var granny = parent._parent;
+
+        parent.left = rightKid;
+        if (rightKid) {
+            rightKid._parent = parent;
+        }
+        parent._parent = this;
+
+        this.right = parent;
+        this._parent = granny;
+        if (!granny) {
+            this._tree._root = this;
+        } else {
+            if (granny.left == parent) {
+                granny.left = this;
+            } else {
+                granny.right = this;
+            }
+        }
+    }
 };
 
 
@@ -169,6 +217,6 @@ RedBlackNode.prototype._pathTo = function (leaf) {
 };
 
 RedBlackNode.prototype.toString = function () {
-    var s = "[" + this.key + ", " + (this.isBlack?"black":"red") + "]";
+    var s = "[" + this.key + ", " + (this.isBlack ? "black" : "red") + "]";
     return s;
 };

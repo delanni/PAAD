@@ -10,23 +10,36 @@ RedBlackTree.prototype.put = function (key, value) {
 };
 
 RedBlackTree.prototype.get = function (key) {
-    var value = this._retrieve(key);
-    return value;
+    var node = this._retrieve(key);
+    return node && node.value;
 };
 
-RedBlackTree.prototype.delete = function () {
-    
+RedBlackTree.prototype.delete = function (key) {
+    var node = this._retrieve(key);
+    if (!node) return;
+    else {
+        node.delete();
+    }
+    this.size--;
+    if (this.size == 0) this.isEmpty = true;
 };
 
 RedBlackTree.prototype._insert = function (n) {
     if (this.isEmpty) {
         this._root = n;
         n.recolor();
+        this.size++;
+        this.isEmpty = false;
     } else {
-        this._root.attach(n);
+        var node = this._retrieve(n.key);
+        if (node) {
+            node.value = n.value;
+        } else {
+            this._root.attach(n);
+            this.size++;
+            this.isEmpty = false;
+        }
     }
-    this.size++;
-    this.isEmpty = false;
 };
 
 RedBlackTree.prototype._retrieve = function (k) {
@@ -62,11 +75,11 @@ RedBlackTree.prototype.validateRedBlack = function () {
     //        return n.isBlack;
     //    });
 
-    var blackNodes = nodes.filter(function (e) {
+    var redNodes = nodes.filter(function (e) {
         return !e.isBlack;
     });
 
-    var clause4 = blackNodes.length == 0 || blackNodes.some(function (e) {
+    var clause4 = redNodes.length == 0 || redNodes.every(function (e) {
         return (!e.left || e.left.isBlack) && (!e.right || e.right.isBlack);
     });
 
@@ -84,8 +97,8 @@ RedBlackTree.prototype.validateRedBlack = function () {
         var blackLengths = paths.map(function (p) {
             if (!p) return 0;
             var length = p.reduce(function (sum, step) {
-                return sum + step.isBlack ? 1 : 0;
-            });
+                return sum + (step.isBlack ? 1 : 0);
+            }, 0);
             return length;
         });
 
