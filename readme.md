@@ -28,9 +28,9 @@ I aim to practise and discover data structures and algorithms commonly known in 
  * * [x] Stack 
  * * [x] Heap 
  * * [x] Red-Black tree
- * * [ ] Graph with Edges and Nodes
  * * [ ] LRU cache
  * * [ ] Bloom filter
+ * * [ ] Graph with Edges and Nodes
 
 #### Algorithms
  

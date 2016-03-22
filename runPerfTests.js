@@ -31,16 +31,27 @@ function runPerfCase(testCase) {
     console.log(" Loading source files:");
     contestants.forEach(function (e) {
         if (e.path) {
-            console.log("  - " + e.path);
-            var source = fs.readFileSync(e.path).toString();
-            eval(source);
+            var files = e.path.split(",");
+            for (var i = 0; i < files.length; i++) {
+                if (files[i]) {
+                    console.log("  - " + e.path);
+                    var source = fs.readFileSync(files[i]).toString();
+                    eval(source);
+                }
+            }
         }
         e.ctor = eval(e.name);
     });
 
     console.log("Starting fixture...");
-    var results = fixture.apply(fixture, contestants);
-    console.log("... fixture finished.");
+    try {
+        var results = fixture.apply(fixture, contestants);
+    } catch (ex) {
+        console.error(ex);
+        console.trace(ex);
+    } finally {
+        console.log("... fixture finished.");
+    }
 
     console.log(" -- Results --");
     var keys = Object.keys(results[0]);

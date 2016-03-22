@@ -121,7 +121,6 @@ RedBlackNode.prototype.recolor = function () {
 };
 
 RedBlackNode.prototype._rotateLeft = function () {
-    // TODO: Revise
     var parent = this._parent;
     var leftKid = this.left;
 
@@ -149,7 +148,6 @@ RedBlackNode.prototype._rotateLeft = function () {
 };
 
 RedBlackNode.prototype._rotateRight = function () {
-    // TODO: Revise
     var parent = this._parent;
     var rightKid = this.right;
 
