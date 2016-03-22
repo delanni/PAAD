@@ -25,6 +25,7 @@ RedBlackTree.prototype.delete = function (key) {
         this.isEmpty = true;
         this._root = null;
     }
+    return node.value;
 };
 
 RedBlackTree.prototype._insert = function (n) {
@@ -56,6 +57,14 @@ RedBlackTree.prototype.getNodes = function () {
     } else {
         return [];
     }
+};
+
+RedBlackTree.prototype.getKeys = function(){
+    return this.getNodes().map(function(e){ return e.key; });
+};
+
+RedBlackTree.prototype.getValues = function(){
+    return this.getNodes().map(function(e){ return e.value; });
 };
 
 RedBlackTree.prototype.validateRedBlack = function () {

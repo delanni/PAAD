@@ -15,7 +15,7 @@ describe("Instantiation and API", function () {
     });
 });
 
-describe("Behaviour", function () {
+describe("Red Black Tree", function () {
     it("can be put into", function () {
         var t = new RedBlackTree();
 
@@ -264,5 +264,24 @@ describe("Behaviour", function () {
         t.delete("jibjabagain");
         
         expect(t.size).toBe(0);
+    });
+    
+    it("retrieves keys and values when asked to", function(){
+        var t = new RedBlackTree();
+        
+        t.put("k1",1);
+        t.put("k2",2);
+        t.put("k3",3);
+        
+        var keys = t.getKeys();
+        var values = t.getValues();
+        
+        expect(keys).toContain("k1");
+        expect(keys).toContain("k2");
+        expect(keys).toContain("k3");
+        
+        expect(values).toContain(1);
+        expect(values).toContain(2);
+        expect(values).toContain(3);
     });
 });
